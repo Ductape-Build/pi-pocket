@@ -4,6 +4,21 @@ The Windows installer and the macOS package install a desktop app: **Pi Pocket**
 
 The console launcher stays, as **Pi Pocket (console)**: it has the access menu (the local network, a Cloudflare tunnel, Tailscale), the keys, and the sign-in QR code.
 
+## Arch Linux / Omarchy
+
+From this checkout, run:
+
+```sh
+cd packaging/linux
+makepkg -si
+```
+
+Open **Pi Pocket** from the application launcher, or run `pi-pocket-desktop`. It opens Chromium in app mode with a dedicated browser profile and signs in with the one-time link described below. It does not put the owner token on the command line.
+
+If a Pi Pocket launcher is already running for the same data directory (default `~/.pi-pocket`, overridden by `PI_POCKET_DIR`), the app reuses its local HTTP address and leaves it running when the window closes. Otherwise the app starts its own loopback-only server without changing the console launcher's saved access mode. Closing the last app window stops that server. Keep a separate console or [systemd service](systemd.md) running if you want phone access or background runs after closing the app. For a server listening on a Unix socket, open the reverse proxy URL in your browser instead.
+
+Startup failures are shown as desktop notifications. Server startup output is in `${XDG_STATE_HOME:-~/.local/state}/pi-pocket/desktop.log`. Update the Arch install by rebuilding the package, not through the in-app updater.
+
 ## How it opens
 
 |                       | Windows                                                                             | macOS                                                                                          |

@@ -17,3 +17,6 @@ result-*
 /*.tgz
 packaging/windows/out/
 packaging/macos/out/
+/packaging/linux/*.pkg.tar.*
+/packaging/linux/pkg/
+/packaging/linux/src/

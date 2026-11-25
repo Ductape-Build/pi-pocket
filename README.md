@@ -43,6 +43,7 @@ Or try `npx pi-pocket`. Choose how your devices should connect, then open the la
 
 - <a name="windows-installer"></a>**Windows:** [`Pi-Pocket-Setup-<version>.exe`](docs/windows.md). Install Git for Windows if you need Pi’s shell tools and don’t already have Bash.
 - <a name="macos-package"></a>**macOS:** [`Pi-Pocket-<version>.pkg`](docs/macos.md) for Apple silicon or Intel, macOS 13.5 or newer.
+- **Arch Linux / Omarchy:** [Build and install the desktop launcher from this checkout](docs/desktop-app.md#arch-linux--omarchy).
 - <a name="other-ways-to-run-it"></a>**Other setups:** [Android with Termux](docs/running.md#android-termux) · [Docker or Podman](docs/docker.md) · [Nix](flake.nix) (`nix run github:TannerMidd/pi-pocket`) · [Linux systemd service](docs/systemd.md).
 
 **Updates:** Menu → **Update Pi Pocket** handles supported installs. For local npm installs, `npx`, or rollback precautions, see [updates and backups](docs/running.md#updates-and-backups).

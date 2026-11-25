@@ -1,0 +1,31 @@
+# Build from the Pi Pocket checkout: cd packaging/linux && makepkg
+pkgname=pi-pocket-desktop
+pkgver=0.30.1
+pkgrel=1
+pkgdesc='Pi Pocket desktop launcher and local server'
+arch=('x86_64' 'aarch64')
+url='https://github.com/TannerMidd/pi-pocket'
+license=('MIT')
+depends=('nodejs>=22.19' 'chromium' 'libnotify' 'git')
+makedepends=('npm')
+# The npm bundle includes already-built native addons, including for the other architecture.
+options=(!strip !debug)
+
+build() {
+    local checkout="$startdir/../.."
+    node "$checkout/packaging/bundle-app.mjs" "$checkout" "$srcdir/bundle" "$pkgver"
+}
+
+package() {
+    local checkout="$startdir/../.."
+    local app="lib/pi-pocket/node_modules/pi-pocket"
+
+    install -d "$pkgdir/usr/lib/pi-pocket" "$pkgdir/usr/bin"
+    cp -a "$srcdir/bundle/lib/node_modules" "$pkgdir/usr/lib/pi-pocket/"
+    install -Dm755 "$startdir/pi-pocket-desktop.mjs" \
+        "$pkgdir/usr/$app/packaging/linux/pi-pocket-desktop.mjs"
+    ln -s "../$app/packaging/linux/pi-pocket-desktop.mjs" "$pkgdir/usr/bin/pi-pocket-desktop"
+    install -Dm644 "$startdir/pi-pocket.desktop" "$pkgdir/usr/share/applications/pi-pocket.desktop"
+    install -Dm644 "$checkout/web/icon.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/pi-pocket.svg"
+    install -Dm644 "$checkout/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

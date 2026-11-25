@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Pi Pocket
+Comment=Run and open Pi Pocket on this computer
+Exec=pi-pocket-desktop
+Icon=pi-pocket
+StartupWMClass=pi-pocket
+Terminal=false
+Categories=Development;
